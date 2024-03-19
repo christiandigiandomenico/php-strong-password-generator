@@ -4,6 +4,16 @@ ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
 
+include "./partials/functions.php";
+
+session_start();
+
+if (isset($_GET['passgenerator'])) {
+    $_SESSION['generatedPassword'] = passwordGenerator($numberGet);
+
+    header('Location: ./results.php');
+}
+
 ?>
 
 <!DOCTYPE html>
@@ -21,24 +31,13 @@ error_reporting(E_ALL);
 
     <h1>Password Generator</h1>
 
-    <form method="GET" action="results.php">
+    <form method="GET" action="./index.php">
         <div class="input-group flex-nowrap my-3">
             <span class="input-group-text" id="passwordgenerator">Inserisci un numero</span>
             <input type="number" class="form-control" placeholder="Username" aria-label="Username" aria-describedby="addon-wrapping" id="passgenerator" name="passgenerator">
             <input type="submit">
         </div>
     </form>
-
-    <?php
-
-    include "./partials/functions.php";
-
-    session_start();
-
-    $_SESSION['generatedPassword'] = passwordGenerator($numberGet);
-
-    ?>
-
 
     <!-- Bootstrap -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
