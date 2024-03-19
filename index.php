@@ -21,28 +21,34 @@ error_reporting(E_ALL);
 
     <h1>Password Generator</h1>
 
-    <div class="input-group flex-nowrap my-3">
-        <span class="input-group-text" id="passwordgenerator" name="passwordgenerator">Inserisci una parola</span>
-        <input type="text" class="form-control" placeholder="Username" aria-label="Username" aria-describedby="addon-wrapping">
-        <input type="submit">
-    </div>
+    <form method="GET">
+        <div class="input-group flex-nowrap my-3">
+            <span class="input-group-text" id="passwordgenerator">Inserisci una numero</span>
+            <input type="number" class="form-control" placeholder="Username" aria-label="Username" aria-describedby="addon-wrapping" id="passgenerator" name="passgenerator">
+            <input type="submit">
+        </div>
+    </form>
 
     <?php
 
-    function getRandomStringRand($length)
+    $numberGet = $_GET['passgenerator'];
+
+    function passwordGenerator($number)
     {
-        $stringSpace = $_GET['passwordgenerator'];
-        $stringLength = strlen($stringSpace);
-        $randomString = '';
-        for ($i = 0; $i < $length; $i++) {
-            $randomString = $randomString . $stringSpace[rand(0, $stringLength - 1)];
-        }
-        return $randomString;
+
+        $passString = '';
+
+        for ($i = 0; $i < $number; $i++) {
+
+            $passString .= chr(rand(33, 126));
+        };
+
+        return $passString;
     }
 
     ?>
 
-    La lunghezza della frase è: <?php $stringLength ?>
+    La password generata è: <?php echo passwordGenerator($numberGet) ?>
 
 
     <!-- Bootstrap -->
